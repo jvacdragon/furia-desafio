@@ -98,10 +98,10 @@ def last_coaches(msg):
         reply = textwrap.dedent(f"""
         Segue lista com os últimos técnicos (coaches) do time da FURIA de CS e suas datas de entrada e saída do time:
         
-        Lucid (Hunter Tucker) - 09.07.2024 até 15.01.2025
-        Inersh1ne (Viacheslav Britvin) - 09.07.2024 até 31.12.2024
-        Sidde (Sidnei Macedo) - 16.01.2023 até 09.07.2024
-        Guerri (Nicholas Nogueira ) - 02.02.2018 até 09.07.2024
+        Lucid (Hunter Tucker) - 09/07/2024 até 15/01/2025
+        Inersh1ne (Viacheslav Britvin) - 09/07/2024 até 31/12/2024
+        Sidde (Sidnei Macedo) - 16/01/2023 até 09/07/2024
+        Guerri (Nicholas Nogueira ) - 02/02/2018 até 09/07/2024
         
         Caso queira voltar para inicio, clique em /start e caso queira voltar para ultimo menu, clique em {last_main_command}
         """)
@@ -126,7 +126,7 @@ def last_players(msg):
 
         bot.reply_to(msg, reply)
         
-@bot.message_handler(commands=["competitions"])
+@bot.message_handler(commands=["competicoes"])
 def last_win_competitions(msg):
 
     if (last_main_command == "/historico"):
@@ -170,7 +170,7 @@ def teams_and_players(msg):
 
     bot.reply_to(msg, reply)
     
-bot.message_handler(commands=["historico"])
+@bot.message_handler(commands=["historico"])
 def history(msg):
     global last_main_command
     last_main_command = "/historico"
@@ -179,7 +179,7 @@ def history(msg):
                 Quando foi criado o time de CS da FURIA? /criacao
                 Quem foram os ultimos jogadores do time? /ultimos_jogadores
                 Quem foram os ultimos técnicos do time? /ultimos_tecnicos
-                Quais títulos a FURIA ja conquistou com CS? /competitions
+                Quais títulos a FURIA ja conquistou com CS? /competicoes
             """)
 
     bot.reply_to(msg, reply)
