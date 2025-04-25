@@ -4,14 +4,12 @@ import textwrap
 def register(bot):
     @bot.message_handler(commands=["historico"])
     def history(msg):
-        
-        set_last_command("/historico")
-
+        set_last_command("/historico", None)
         reply = textwrap.dedent(f"""
-                    Quando foi criado o time de CS da FURIA? /criacao
-                    Quem foram os ultimos jogadores do time? /ultimos_jogadores
-                    Quem foram os ultimos técnicos do time? /ultimos_tecnicos
-                    Quais títulos a FURIA ja conquistou com CS? /competicoes
+                        Quando foi criado o time de CS da FURIA? /criacao
+                        Quem foram os ultimos jogadores do time? /ultimos_jogadores
+                        Quem foram os ultimos técnicos do time? /ultimos_tecnicos
+                        Quais títulos a FURIA ja conquistou com CS? /competicoes
                 """)
 
         bot.reply_to(msg, reply)
@@ -19,19 +17,19 @@ def register(bot):
     @bot.message_handler(commands=["criacao"])
     def born_when(msg):
 
-        if (get_last_command() == "/historico"):
-            reply = textwrap.dedent(f"""
+        set_last_command("/historico", "/ciacao")
+        reply = textwrap.dedent(f"""
             A FURIA foi criada no ano de 2017, em São Paulo, por André Akkari, Jaime Pádua e Cris Guedes, como um time de Counter-Strike e já tendo um time com cinco jogadores e um técnico.
             
             Caso queira voltar para inicio, clique em /start e caso queira voltar para ultimo menu, clique em {get_last_command()}
-            """)
+        """)
 
-            bot.reply_to(msg, reply)
+        bot.reply_to(msg, reply)
             
     @bot.message_handler(commands=["ultimos_tecnicos"])
     def last_coaches(msg):
-        if (get_last_command() == "/historico"):
-            reply = textwrap.dedent(f"""
+        set_last_command("/historico", "/ultimos_tecnicos")
+        reply = textwrap.dedent(f"""
             Segue lista com os últimos técnicos (coaches) do time da FURIA de CS e suas datas de entrada e saída do time:
             
             Lucid (Hunter Tucker) - 09/07/2024 até 15/01/2025
@@ -40,15 +38,15 @@ def register(bot):
             Guerri (Nicholas Nogueira ) - 02/02/2018 até 09/07/2024
             
             Caso queira voltar para inicio, clique em /start e caso queira voltar para ultimo menu, clique em {get_last_command()}
-            """)
+        """)
 
-            bot.reply_to(msg, reply)
+        bot.reply_to(msg, reply)
             
     @bot.message_handler(commands=["ultimos_jogadores"])
     def last_players(msg):
 
-        if (get_last_command() == "/historico"):
-            reply = textwrap.dedent(f"""
+        set_last_command("/historico", "/ultimos_jogadores")
+        reply = textwrap.dedent(f"""
             Segue lista com os últimos jogadores do time da FURIA de CS e suas datas de entrada e saída do time:
             
             Skullz (Felipe Frank Medeiros) - 09/07/2024 até 22/04/2025
@@ -58,15 +56,15 @@ def register(bot):
             Saffee (Rafael Innocencio) - 06/01/2022 até 28/06/2023
             
             Caso queira voltar para inicio, clique em /start e caso queira voltar para ultimo menu, clique em {get_last_command()}
-            """)
+        """)
 
-            bot.reply_to(msg, reply)
+        bot.reply_to(msg, reply)
             
     @bot.message_handler(commands=["competicoes"])
     def last_win_competitions(msg):
 
-        if (get_last_command() == "/historico"):
-            reply = textwrap.dedent(f"""
+        set_last_command("/historico", "/competicoes")
+        reply = textwrap.dedent(f"""
             Segue lista com as últimas competições ganhas pelos times de CS da FURIA:
             
             1 - Aorus League – Brazil: Finals – Season 1 (2018)
@@ -88,6 +86,6 @@ def register(bot):
             17 - IEM New York NA (2020)
             
             Caso queira voltar para inicio, clique em /start e caso queira voltar para ultimo menu, clique em {get_last_command()}
-            """)
+        """)
 
-            bot.reply_to(msg, reply)
+        bot.reply_to(msg, reply)

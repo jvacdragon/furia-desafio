@@ -1,21 +1,25 @@
 import telebot
 import textwrap
-from handlers import time_e_jogadores, calendarios, historico
+from utils.middleware_bot import StateMiddleware
+from handlers import time_e_jogadores, calendarios, historico, curiosidades
 from utils.state import set_last_command, get_last_command
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-bot = telebot.TeleBot(BOT_TOKEN)
+bot = telebot.TeleBot(BOT_TOKEN, use_class_middlewares=True)
+
+bot.setup_middleware(StateMiddleware(bot))
 
 time_e_jogadores.register(bot)
 calendarios.register(bot)
 historico.register(bot)
+curiosidades.register(bot)
                 
 @bot.message_handler(commands=["start"])
 def answer(msg):
-    set_last_command("/start")
+    set_last_command("/start", None)
     reply = textwrap.dedent(f"""
                 Olá {msg.from_user.first_name}! Bem vindo ao bot de CS da FURIA!
                 Sobre o que você quer saber?
@@ -31,11 +35,7 @@ def answer(msg):
 
 @bot.message_handler(func=lambda msg: True)
 def fallback_message(message):
-    if (get_last_command() == "/start"):
-        bot.reply_to(message, "Não entendi 😅. Para começar, digite /start.")
-    else:
-        bot.reply_to(
-            message, f"Não entendi 😅. Voce gostaria de voltar para o inicio com /start ou prefere voltar ao ultimo menu com {get_last_command()}")
+    bot.reply_to(message, "Não entendi 😅. Para iniciar o bot, digite /start.")
 
 
 bot.polling()
